@@ -1,4 +1,23 @@
-h1 {
-	font-size: 1.8em;
+* {
 	font-family: 'Permanent Marker', cursive;
+}
+
+#polaroid {
+	border: 1px solid darkslategrey;
+	background-color: whitesmoke;
+	width: 600px;
+	height: auto;
+	display: flex;
+	flex-flow: column;
+	justify-content: start;
+	align-items: center;
+}
+
+canvas {
+	border: 1px solid darkslategrey;
+}
+
+h1, h2 {
+	height: auto;
+	font-size: 1.8em;
 }

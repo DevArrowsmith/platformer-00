@@ -1,5 +1,5 @@
 const player = {
-	x: 200,
+	x: 40,
 	y: 200,
 	x_v: 0,
 	y_v: 0,
@@ -44,8 +44,8 @@ let numPlatforms = 2;
 let platforms = [];
 
 const renderCanvas = () => {
-	ctx.fillStyle = "#F0F8FF";
-	ctx.fillRect(0, 0, 270, 270);
+	ctx.fillStyle = "lightyellow";
+	ctx.fillRect(0, 0, 500, 500);
 };
 
 const renderPlayer = () => {
@@ -59,7 +59,7 @@ const createPlatforms = () => {
 			{
 				x: 100 * i,
 				y: 200 + (30 * i),
-				width: 110,
+				width: 50,
 				height: 15,
 			}
 		);
@@ -91,11 +91,11 @@ const gameLoop = () => {
 	player.x += player.x_v;
 
 	let i = -1;
-	if(platforms[0].x < player.x && player.x < platforms[0].x + platforms[0].width &&
+	if(platforms[0].x < player.x && player.x < platforms[0].x + platforms[0].width + 4 &&
 	platforms[0].y < player.y && player.y < platforms[0].y + platforms[0].height){
 		i = 0;
 	}
-	if(platforms[1].x < player.x && player.x < platforms[1].x + platforms[1].width &&
+	if(platforms[1].x  < player.x && player.x < platforms[1].x + platforms[1].width + 4 &&
 	platforms[1].y < player.y && player.y < platforms[1].y + platforms[1].height){
 		i = 1;
 	}
@@ -109,11 +109,19 @@ const gameLoop = () => {
 	renderPlatforms();
 } 
 
+const retryButton = document.querySelector("#retry");
+
 canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
-ctx.canvas.height = 270;
-ctx.canvas.width = 270;
+ctx.canvas.height = 500;
+ctx.canvas.width = 500;
 createPlatforms();
 document.addEventListener("keyup", keyUp);
 document.addEventListener("keydown", keyDown);
+retryButton.addEventListener("click", () => {
+	player.y = 200;
+	player.x = 40;
+
+});
+
 setInterval(gameLoop, 20);
