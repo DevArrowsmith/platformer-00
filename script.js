@@ -14,19 +14,30 @@ const arrowKeys = {
 	up: false,
 }
 
+const gravity = 0.6;
 const friction = 0.7;
 
 const keyDown = (key) => {
-	if (key.keyCode === 39) {arrowKeys.right = true};
 	if (key.keyCode === 37) {arrowKeys.left = true};
+	if (key.keyCode === 39) {arrowKeys.right = true};
+	if (key.keyCode === 38) {
+		if(player.Jump === false) {
+			player.y_v = -10;
+		}
+	}
 	//TODO: Can ternary if be used for statements with only one outcome?
 };
 
 const keyUp = (key) => {
-	if (key.keyCode === 39) {arrowKeys.right = false};
 	if (key.keyCode === 37) {arrowKeys.left = false};
+	if (key.keyCode === 39) {arrowKeys.right = false};
+	if (key.keyCode === 38) {
+		if (player.y_v < -2) {
+			player.y_v = -3;
+		}
+	}
 	//TODO: Can ternary if be used for statements with only one outcome?	
-}
+};
 
 let numPlatforms = 2;
 
@@ -68,6 +79,16 @@ const gameLoop = () => {
 	if(arrowKeys.left) {
 		player.x += -2.5;
 	};
+
+	if(player.jump === false) {
+		player.x_v *= friction;	
+	} else {
+		player.y_v += gravity;
+	};
+	player.jump = true;
+
+	player.y += player.y_v;
+	player.x += player.x_v;
 
 	renderCanvas();
 	renderPlayer();
