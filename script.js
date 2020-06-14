@@ -14,7 +14,7 @@ const arrowKeys = {
 	jump: false,
 }
 
-const gravity = 0.6;
+let gravity = 0.6;
 const friction = 0.7;
 
 const keyDown = (key) => {
@@ -118,9 +118,15 @@ ctx.canvas.width = 500;
 createPlatforms();
 document.addEventListener("keyup", keyUp);
 document.addEventListener("keydown", keyDown);
+//TODO: Animate Retry button
 retryButton.addEventListener("click", () => {
+//	this.styleMedia.backgroundColor = darkslategrey;
+	gravity = 0;
+	player.x_v = 0;
+	player.y_v = 0;
 	player.y = 200;
 	player.x = 40;
+	gravity = 0.6;
 
 });
 
