@@ -11,7 +11,7 @@ const player = {
 const arrowKeys = {
 	right: false,
 	left: false,
-	up: false,
+	jump: false,
 }
 
 const gravity = 0.6;
@@ -20,8 +20,8 @@ const friction = 0.7;
 const keyDown = (key) => {
 	if (key.keyCode === 37) {arrowKeys.left = true};
 	if (key.keyCode === 39) {arrowKeys.right = true};
-	if (key.keyCode === 38) {
-		if(player.Jump === false) {
+	if (key.keyCode === 38) { 
+		if(player.jump === false) {
 			player.y_v = -10;
 		}
 	}
@@ -89,6 +89,20 @@ const gameLoop = () => {
 
 	player.y += player.y_v;
 	player.x += player.x_v;
+
+	let i = -1;
+	if(platforms[0].x < player.x && player.x < platforms[0].x + platforms[0].width &&
+	platforms[0].y < player.y && player.y < platforms[0].y + platforms[0].height){
+		i = 0;
+	}
+	if(platforms[1].x < player.x && player.x < platforms[1].x + platforms[1].width &&
+	platforms[1].y < player.y && player.y < platforms[1].y + platforms[1].height){
+		i = 1;
+	}
+	if (i > -1){
+		player.jump = false;
+		player.y = platforms[i].y;    
+	}
 
 	renderCanvas();
 	renderPlayer();
