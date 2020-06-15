@@ -39,7 +39,7 @@ const keyUp = (key) => {
 	//TODO: Can ternary if be used for statements with only one outcome?	
 };
 
-let numPlatforms = 2;
+let numPlatforms = 5;
 
 let platforms = [];
 
@@ -89,19 +89,21 @@ const gameLoop = () => {
 
 	player.y += player.y_v;
 	player.x += player.x_v;
+	
+	let currentPlatform = -1;
 
-	let i = -1;
-	if(platforms[0].x < player.x && player.x < platforms[0].x + platforms[0].width + 4 &&
-	platforms[0].y < player.y && player.y < platforms[0].y + platforms[0].height){
-		i = 0;
+	const platformCheck = (platformElem, platformIndex) => {
+		if(platformElem.x-2.5 < player.x && player.x < platformElem.x + platformElem.width + 22.5 &&
+		platformElem.y < player.y && player.y < platformElem.y + platformElem.height) {
+			currentPlatform = platformIndex;
+		}
 	}
-	if(platforms[1].x  < player.x && player.x < platforms[1].x + platforms[1].width + 4 &&
-	platforms[1].y < player.y && player.y < platforms[1].y + platforms[1].height){
-		i = 1;
-	}
-	if (i > -1){
+
+	platforms.forEach(platformCheck);
+
+	if (currentPlatform > -1){
 		player.jump = false;
-		player.y = platforms[i].y;    
+		player.y = platforms[currentPlatform].y;    
 	}
 
 	renderCanvas();
@@ -120,14 +122,15 @@ document.addEventListener("keyup", keyUp);
 document.addEventListener("keydown", keyDown);
 //TODO: Animate Retry button
 retryButton.addEventListener("click", () => {
-//	this.styleMedia.backgroundColor = darkslategrey;
+	retryButton.style.backgroundColor = "rgba(248, 239, 161, 0.801)";
 	gravity = 0;
 	player.x_v = 0;
 	player.y_v = 0;
 	player.y = 200;
 	player.x = 40;
 	gravity = 0.6;
-
+//TODO: Make Retry Button color reset after 1/2s
+//TODO: Give Retry button curved corners or somethinggit
 });
 
 setInterval(gameLoop, 20);
