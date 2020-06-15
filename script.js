@@ -53,18 +53,22 @@ const renderPlayer = () => {
 	ctx.fillRect((player.x)-20, (player.y)-20, player.width, player.height);
 };
 
+let currentPlatformY = 400;
+
 const createPlatforms = () => {
 	for (i=0; i<numPlatforms; i++) {
+		currentPlatformY += ((Math.floor(Math.random() * 100)) - 50);
 		platforms.push(
 			{
 				x: 100 * i,
-				y: 200 + (30 * i),
+				y: currentPlatformY,
 				width: 50,
 				height: 15,
 			}
 		);
+		
 	}
-}
+};
 
 const renderPlatforms = () => {
 	ctx.fillStyle = "#45597E";
@@ -83,7 +87,11 @@ const gameLoop = () => {
 	if(player.jump === false) {
 		player.x_v *= friction;	
 	} else {
-		player.y_v += gravity;
+		if (player.y_v < 10) {
+			player.y_v += gravity
+		} else {
+			player.y_v = 10
+		};
 	};
 	player.jump = true;
 
@@ -123,12 +131,15 @@ document.addEventListener("keydown", keyDown);
 //TODO: Animate Retry button
 retryButton.addEventListener("click", () => {
 	retryButton.style.backgroundColor = "rgba(248, 239, 161, 0.801)";
+	platforms = [];
 	gravity = 0;
 	player.x_v = 0;
 	player.y_v = 0;
 	player.y = 200;
 	player.x = 40;
 	gravity = 0.6;
+	createPlatforms();
+
 //TODO: Make Retry Button color reset after 1/2s
 //TODO: Give Retry button curved corners or somethinggit
 });
