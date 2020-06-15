@@ -25,7 +25,6 @@ const keyDown = (key) => {
 			player.y_v = -10;
 		}
 	}
-	//TODO: Can ternary if be used for statements with only one outcome?
 };
 
 const keyUp = (key) => {
@@ -36,7 +35,6 @@ const keyUp = (key) => {
 			player.y_v = -3;
 		}
 	}
-	//TODO: Can ternary if be used for statements with only one outcome?	
 };
 
 let numPlatforms = 5;
@@ -53,20 +51,31 @@ const renderPlayer = () => {
 	ctx.fillRect((player.x)-20, (player.y)-20, player.width, player.height);
 };
 
-let currentPlatformY = 400;
+let currentPlatformY = 250;
 
 const createPlatforms = () => {
 	for (i=0; i<numPlatforms; i++) {
-		currentPlatformY += ((Math.floor(Math.random() * 100)) - 50);
-		platforms.push(
-			{
-				x: 100 * i,
-				y: currentPlatformY,
-				width: 50,
-				height: 15,
-			}
-		);
-		
+		currentPlatformY += ((Math.floor(Math.random() * 150)) - 75);
+		if (currentPlatformY < 485 && currentPlatformY > 100) { 
+			platforms.push(
+				{
+					x: 100 * i,
+					y: currentPlatformY,
+					width: 50,
+					height: 15,
+				}
+			)
+		} else {
+			currentPlatformY = 425;
+			platforms.push(
+				{
+					x: 100 * i,
+					y: currentPlatformY,
+					width: 50,
+					height: 15,
+				}
+			)
+		};		
 	}
 };
 
