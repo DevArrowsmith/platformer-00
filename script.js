@@ -1,8 +1,8 @@
 const player = {
-	x: 40,
-	y: 200,
-	x_v: 0,
-	y_v: 0,
+	x: 25,
+	y: 100,
+	velocity_x: 0,
+	velocity_y: 0,
 	jump: true,
 	height: 20,
 	width: 20
@@ -22,7 +22,7 @@ const keyDown = (key) => {
 	if (key.keyCode === 39) {arrowKeys.right = true};
 	if (key.keyCode === 38) { 
 		if(player.jump === false) {
-			player.y_v = -10;
+			player.velocity_y = -10;
 		}
 	}
 };
@@ -31,8 +31,8 @@ const keyUp = (key) => {
 	if (key.keyCode === 37) {arrowKeys.left = false};
 	if (key.keyCode === 39) {arrowKeys.right = false};
 	if (key.keyCode === 38) {
-		if (player.y_v < -2) {
-			player.y_v = -3;
+		if (player.velocity_y < -2) {
+			player.velocity_y = -3;
 		}
 	}
 };
@@ -40,6 +40,7 @@ const keyUp = (key) => {
 let numPlatforms = 5;
 
 let platforms = [];
+let dodgers = [];
 
 const renderCanvas = () => {
 	ctx.fillStyle = "lightyellow";
@@ -50,6 +51,15 @@ const renderPlayer = () => {
 	ctx.fillStyle = "#F08080";
 	ctx.fillRect((player.x)-20, (player.y)-20, player.width, player.height);
 };
+
+/*
+const renderDodgerEnemy = (originX, originY) => {
+	ctx.fillStyle = "#000000";
+	ctx.fillRect(originX, originY, 15, 15);
+};
+
+renderDodgerEnemy(100, 100);
+*/
 
 let currentPlatformY = 250;
 
@@ -64,7 +74,17 @@ const createPlatforms = () => {
 					width: 50,
 					height: 15,
 				}
-			)
+			);
+			if ((Math.floor(Math.random() * 2) > 0) && platforms.length > 1) {
+				dodgers.push(
+					{
+						x: (100 * i) + (platforms[i].width / 3),
+						y: currentPlatformY + 25,
+						width: 15,
+						height: 15,
+					}
+				)
+			};
 		} else {
 			currentPlatformY = 425;
 			platforms.push(
@@ -74,14 +94,21 @@ const createPlatforms = () => {
 					width: 50,
 					height: 15,
 				}
-			)
+			);
 		};		
 	}
 };
 
+
+
 const renderPlatforms = () => {
 	ctx.fillStyle = "#45597E";
 	platforms.forEach(platform => ctx.fillRect(platform.x, platform.y, platform.width, platform.height));
+}
+
+const renderDodgers = () => {
+	ctx.fillStyle = "#000000";
+	dodgers.forEach(dodger => ctx.fillRect(dodger.x, dodger.y, dodger.width, dodger.height));
 }
 
 const gameLoop = () => {
@@ -94,18 +121,18 @@ const gameLoop = () => {
 	};
 
 	if(player.jump === false) {
-		player.x_v *= friction;	
+		player.velocity_x *= friction;	
 	} else {
-		if (player.y_v < 10) {
-			player.y_v += gravity
+		if (player.velocity_y < 10) {
+			player.velocity_y += gravity
 		} else {
-			player.y_v = 10
+			player.velocity_y = 10
 		};
 	};
 	player.jump = true;
 
-	player.y += player.y_v;
-	player.x += player.x_v;
+	player.y += player.velocity_y;
+	player.x += player.velocity_x;
 	
 	let currentPlatform = -1;
 
@@ -126,6 +153,7 @@ const gameLoop = () => {
 	renderCanvas();
 	renderPlayer();
 	renderPlatforms();
+	renderDodgers();
 } 
 
 const retryButton = document.querySelector("#retry");
@@ -142,8 +170,8 @@ retryButton.addEventListener("click", () => {
 	retryButton.style.backgroundColor = "rgba(248, 239, 161, 0.801)";
 	platforms = [];
 	gravity = 0;
-	player.x_v = 0;
-	player.y_v = 0;
+	player.velocity_x = 0;
+	player.velocity_y = 0;
 	player.y = 200;
 	player.x = 40;
 	gravity = 0.6;
