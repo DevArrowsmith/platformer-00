@@ -16,6 +16,7 @@ const arrowKeys = {
 
 let gravity = 0.6;
 const friction = 0.7;
+let dodgerSpeed = 0.1;
 
 const keyDown = (key) => {
 	if (key.keyCode === 37) {arrowKeys.left = true};
@@ -80,6 +81,9 @@ const createPlatforms = () => {
 					{
 						x: (100 * i) + (platforms[i].width / 3),
 						y: currentPlatformY + 25,
+						origin_y: currentPlatformY,
+						velocity_x: 0,
+						velocity_y: 0,
 						width: 15,
 						height: 15,
 					}
@@ -133,6 +137,26 @@ const gameLoop = () => {
 
 	player.y += player.velocity_y;
 	player.x += player.velocity_x;
+
+	const dodgerController = (dodgerElem) => {
+		if(dodgerElem.y > dodgerElem.origin) {
+			dodgerElem.velocity_y -= dodgerSpeed
+		} else {
+			dodgerElem.velocity_y += dodgerSpeed
+		};
+
+		dodgerElem.y += dodgerElem.velocity_y;
+	};
+
+	dodgers.forEach(dodgerController);
+
+		//origin_y: A property of each dodger object that is equal to the y position of the platform it orbits.
+		// The dodgers start off at origin + 25.
+		// Let's give them an initial upwards velocity too (negative x; TODO:).
+		// We can then use the player jump aspect of the game loop (line 130) as a model of the loop to define velocity.
+
+
+
 	
 	let currentPlatform = -1;
 
