@@ -24,6 +24,14 @@ const arrowKeys = {
 	jump: false,
 }
 
+const canvasParams = {
+	fillColor: "lightYellow",
+	origin_x: 0,
+	origin_y: 0,
+	height: 500,
+	width: 500,
+}
+
 let gravity = 0.6;
 const friction = 0.7;
 let dodgerSpeed = 0.1;
@@ -54,8 +62,8 @@ let platforms = [];
 let dodgers = [];
 
 const renderCanvas = () => {
-	ctx.fillStyle = "lightyellow";
-	ctx.fillRect(0, 0, 500, 500);
+	ctx.fillStyle = `${canvasParams.fillColor}`;
+	ctx.fillRect(canvasParams.origin_x, canvasParams.origin_y, canvasParams.height, canvasParams.width);
 };
 
 const renderPlayer = () => {
@@ -188,6 +196,14 @@ const gameLoop = () => {
 		setPlayerDefault();
 	};
 
+	const fallCheck = () => {
+		if (player.y > canvasParams.height + 20 || player.x < canvasParams.origin_x) { // TODO: Need to add a clause for falls off the right of the screen and not within the goal markers.
+			setPlayerDefault();
+		}
+	};
+
+	fallCheck();
+
 
 	renderCanvas();
 	renderPlayer();
@@ -211,8 +227,8 @@ const newLevelButton = document.querySelector("#new-level");
 
 canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
-ctx.canvas.height = 500;
-ctx.canvas.width = 500;
+ctx.canvas.height = canvasParams.height;
+ctx.canvas.width = canvasParams.width;
 createPlatforms();
 document.addEventListener("keyup", keyUp);
 document.addEventListener("keydown", keyDown);
