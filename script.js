@@ -1,6 +1,6 @@
 const player = {
 	x: 25,
-	y: 30,
+	y: 10,
 	velocity_x: 0,
 	velocity_y: 0,
 	jump: true,
@@ -101,6 +101,12 @@ const renderPlatforms = () => {
 	platforms.forEach(platform => ctx.fillRect(platform.x, platform.y, platform.width, platform.height));
 }
 
+const renderGoal = (finalPlatformY) => {
+	ctx.fillStyle = "#80e080";
+	ctx.fillRect(490, (finalPlatformY - 50), 10, 15);
+	ctx.fillRect(490, (finalPlatformY - 130), 10, 15);
+}
+
 const renderDodgers = () => {
 	ctx.fillStyle = "#000000";
 	dodgers.forEach(dodger => ctx.fillRect(dodger.x, dodger.y, dodger.width, dodger.height));
@@ -161,6 +167,7 @@ const gameLoop = () => {
 	renderPlayer();
 	renderPlatforms();
 	renderDodgers();
+	renderGoal(currentPlatformY);
 } 
 
 const buttonTextFlash = (buttonName) => {
