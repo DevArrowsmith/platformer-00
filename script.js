@@ -139,7 +139,7 @@ const gameLoop = () => {
 	player.x += player.velocity_x;
 
 	const dodgerController = (dodgerElem) => {
-		if(dodgerElem.y > dodgerElem.origin) {
+		if(dodgerElem.y > dodgerElem.origin_y) {
 			dodgerElem.velocity_y -= dodgerSpeed
 		} else {
 			dodgerElem.velocity_y += dodgerSpeed
