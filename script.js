@@ -1,6 +1,6 @@
 const player = {
 	x: 25,
-	y: 100,
+	y: 50,
 	velocity_x: 0,
 	velocity_y: 0,
 	jump: true,
@@ -52,15 +52,6 @@ const renderPlayer = () => {
 	ctx.fillStyle = "#F08080";
 	ctx.fillRect((player.x)-20, (player.y)-20, player.width, player.height);
 };
-
-/*
-const renderDodgerEnemy = (originX, originY) => {
-	ctx.fillStyle = "#000000";
-	ctx.fillRect(originX, originY, 15, 15);
-};
-
-renderDodgerEnemy(100, 100);
-*/
 
 let currentPlatformY = 250;
 
@@ -149,14 +140,6 @@ const gameLoop = () => {
 	};
 
 	dodgers.forEach(dodgerController);
-
-		//origin_y: A property of each dodger object that is equal to the y position of the platform it orbits.
-		// The dodgers start off at origin + 25.
-		// Let's give them an initial upwards velocity too (negative x; TODO:).
-		// We can then use the player jump aspect of the game loop (line 130) as a model of the loop to define velocity.
-
-
-
 	
 	let currentPlatform = -1;
 
@@ -193,6 +176,7 @@ document.addEventListener("keydown", keyDown);
 retryButton.addEventListener("click", () => {
 	retryButton.style.backgroundColor = "rgba(248, 239, 161, 0.801)";
 	platforms = [];
+	dodgers = [];
 	gravity = 0;
 	player.velocity_x = 0;
 	player.velocity_y = 0;
@@ -200,9 +184,17 @@ retryButton.addEventListener("click", () => {
 	player.x = 40;
 	gravity = 0.6;
 	createPlatforms();
-
-//TODO: Make Retry Button color reset after 1/2s
-//TODO: Give Retry button curved corners or somethinggit
 });
 
 setInterval(gameLoop, 20);
+
+/*
+TODO:
+1. Improve the retry button.
+2. Make a collision detector for the dodgers.
+3. Program the result of the dodger collison detecor. Suggest returning the player to the starting position. Could add a nice animation after it's working :3
+4. Add a goal. I suggest a green or light blue marker at the right of the screen a set height above the final platform; the player jumps through this to 'win'.
+5. Add a detector for 'win'. It will be the player passing through the goal.
+6. Add a win animation! Can we do fireworks? I bet we can! Also atext 'you win!' in pixel text, and a 'try again? button which uses an event listener.
+7. Add a counter for the number of wins.
+*/
