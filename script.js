@@ -8,6 +8,16 @@ const player = {
 	width: 20
 };
 
+const setPlayerDefault = () => {
+	player.x = 25,
+	player.y = 10,
+	player.velocity_x = 0,
+	player.velocity_y = 0,
+	player.jump = true,
+	player.height = 20,
+	player.width = 20
+};
+
 const arrowKeys = {
 	right: false,
 	left: false,
@@ -163,6 +173,24 @@ const gameLoop = () => {
 		player.y = platforms[currentPlatform].y;    
 	}
 
+	let currentDodger = -1;
+
+	const dodgerCheck = (dodgerElem, dodgerIndex) => {
+		if(  player.x > dodgerElem.x && player.x < dodgerElem.x + 35 &&
+		player.y > dodgerElem.y && player.y < dodgerElem.y + 30) {
+			currentDodger = dodgerIndex;
+		}
+	}
+
+	dodgers.forEach(dodgerCheck);
+
+
+	//TODO: Below, add the function that will occur when collision with a bumper takes place.
+	if (currentDodger > -1) {
+		setPlayerDefault();
+	};
+
+
 	renderCanvas();
 	renderPlayer();
 	renderPlatforms();
@@ -195,10 +223,7 @@ retryButton.addEventListener("click", () => {
 	platforms = [];
 	dodgers = [];
 	gravity = 0;
-	player.velocity_x = 0;
-	player.velocity_y = 0;
-	player.y = 200;
-	player.x = 40;
+	setPlayerDefault();
 	gravity = 0.6;
 	createPlatforms();
 	buttonTextFlash(retryButton);
