@@ -21,3 +21,21 @@ h1, h2 {
 	height: auto;
 	font-size: 1.8em;
 }
+
+#polaroid-footer {
+	height: 100px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.button {
+	border-radius: 15px; 
+	height: 50px;
+	width: 110px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+}

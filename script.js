@@ -1,6 +1,6 @@
 const player = {
 	x: 25,
-	y: 50,
+	y: 30,
 	velocity_x: 0,
 	velocity_y: 0,
 	jump: true,
@@ -163,6 +163,17 @@ const gameLoop = () => {
 	renderDodgers();
 } 
 
+const buttonTextFlash = (buttonName) => {
+	buttonName.style.color = "#F08050";
+	buttonName.style.transition = "color 0.2s linear";
+	
+	setTimeout(() => {
+		buttonName.style.color = "unset";
+		buttonName.style.transition = "color 0.2s linear";
+	}, 300);
+};
+
+
 const retryButton = document.querySelector("#retry");
 
 canvas = document.getElementById("canvas");
@@ -174,7 +185,6 @@ document.addEventListener("keyup", keyUp);
 document.addEventListener("keydown", keyDown);
 //TODO: Animate Retry button
 retryButton.addEventListener("click", () => {
-	retryButton.style.backgroundColor = "rgba(248, 239, 161, 0.801)";
 	platforms = [];
 	dodgers = [];
 	gravity = 0;
@@ -184,13 +194,14 @@ retryButton.addEventListener("click", () => {
 	player.x = 40;
 	gravity = 0.6;
 	createPlatforms();
+	buttonTextFlash(retryButton);
 });
 
 setInterval(gameLoop, 20);
 
 /*
 TODO:
-1. Improve the retry button.
+1 - DONE - Improve the retry button.
 2. Make a collision detector for the dodgers.
 3. Program the result of the dodger collison detecor. Suggest returning the player to the starting position. Could add a nice animation after it's working :3
 4. Add a goal. I suggest a green or light blue marker at the right of the screen a set height above the final platform; the player jumps through this to 'win'.
