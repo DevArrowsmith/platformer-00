@@ -184,8 +184,6 @@ const gameLoop = () => {
 
 	dodgers.forEach(dodgerCheck);
 
-
-	//TODO: Below, add the function that will occur when collision with a bumper takes place.
 	if (currentDodger > -1) {
 		setPlayerDefault();
 	};
@@ -199,7 +197,7 @@ const gameLoop = () => {
 } 
 
 const buttonTextFlash = (buttonName) => {
-	buttonName.style.color = "#F08050";
+	buttonName.style.color = "#E0E0E0";
 	buttonName.style.transition = "color 0.2s linear";
 	
 	setTimeout(() => {
@@ -208,8 +206,8 @@ const buttonTextFlash = (buttonName) => {
 	}, 300);
 };
 
-
 const retryButton = document.querySelector("#retry");
+const newLevelButton = document.querySelector("#new-level");
 
 canvas = document.getElementById("canvas");
 ctx = canvas.getContext("2d");
@@ -220,13 +218,17 @@ document.addEventListener("keyup", keyUp);
 document.addEventListener("keydown", keyDown);
 //TODO: Animate Retry button
 retryButton.addEventListener("click", () => {
+	setPlayerDefault();
+	buttonTextFlash(retryButton);
+});
+newLevelButton.addEventListener("click", () => {
 	platforms = [];
 	dodgers = [];
 	gravity = 0;
 	setPlayerDefault();
 	gravity = 0.6;
 	createPlatforms();
-	buttonTextFlash(retryButton);
+	buttonTextFlash(newLevelButton);
 });
 
 setInterval(gameLoop, 20);
@@ -234,10 +236,12 @@ setInterval(gameLoop, 20);
 /*
 TODO:
 1 - DONE - Improve the retry button.
-2. Make a collision detector for the dodgers.
-3. Program the result of the dodger collison detecor. Suggest returning the player to the starting position. Could add a nice animation after it's working :3
-4. Add a goal. I suggest a green or light blue marker at the right of the screen a set height above the final platform; the player jumps through this to 'win'.
+2. -DONE- Make a collision detector for the dodgers.
+3. -DONE- Program the result of the dodger collison detecor. Suggest returning the player to the starting position. 
+4. -DONE- Add a goal. I suggest a green or light blue marker at the right of the screen a set height above the final platform; the player jumps through this to 'win'.
+5. Add a detector for falling off the level, and a fall condition.
 5. Add a detector for 'win'. It will be the player passing through the goal.
 6. Add a win animation! Can we do fireworks? I bet we can! Also atext 'you win!' in pixel text, and a 'try again? button which uses an event listener.
 7. Add a counter for the number of wins.
+8. Add a nice animation for fail events eg. dodger collisions  falls.
 */

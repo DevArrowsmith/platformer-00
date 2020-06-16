@@ -21,19 +21,20 @@ h1, h2 {
 	height: auto;
 	font-size: 1.8em;
 }
-
 #polaroid-footer {
 	height: 100px;
+	width: 100%;
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
 }
 
 .button {
+	background-color: rgb(219, 175, 219);
 	border-radius: 15px; 
 	height: 50px;
-	width: 110px;
+	width: 220px;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
