@@ -310,8 +310,9 @@ TODO:
 3. -DONE- Program the result of the dodger collison detecor. Suggest returning the player to the starting position. 
 4. -DONE- Add a goal. I suggest a green or light blue marker at the right of the screen a set height above the final platform; the player jumps through this to 'win'.
 5. -DONE- Add a detector for falling off the level, and a fall condition.
-5. Add a detector for 'win'. It will be the player passing through the goal. TODO: Written the check, need to add the event and uncomment it.
-6. Add a win animation! Can we do fireworks? I bet we can! Also atext 'you win!' in pixel text, and a 'try again? button which uses an event listener.
+5. -DONE- Add a detector for 'win'. It will be the player passing through the goal.
+6. -DONE-Add a win animation! Can we do fireworks? I bet we can! Also atext 'you win!' in pixel text, and a 'try again? button which uses an event listener.
+6B. TODO: Update the firework controller so that rather than dispersing fireworks while theplayer is in the in area, it instead launches a set number of particles 'simultaneously' when the player enters the win area. To rephrase, alter the win condition detector to activate once when the player enters the area then not activate again for a short time. Also make it return the player to the start position, or erase the player.
 7. Add a counter for the number of wins.
 8. Add a nice animation for fail events eg. dodger collisions  falls.
 9. Refactor! In particular, move a lot of functions out of the game loop! Also sort them into a sensible order.
