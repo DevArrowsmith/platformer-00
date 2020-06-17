@@ -119,7 +119,11 @@ const renderPlatforms = () => {
 	platforms.forEach(platform => ctx.fillRect(platform.x, platform.y, platform.width, platform.height));
 }
 
+const goalParams = {};
+
 const renderGoal = (finalPlatformY) => {
+	goalParams.top = finalPlatformY - 130;
+	goalParams.bottom = finalPlatformY - 50;
 	ctx.fillStyle = "#80e080";
 	ctx.fillRect(490, (finalPlatformY - 50), 10, 15);
 	ctx.fillRect(490, (finalPlatformY - 130), 10, 15);
@@ -197,7 +201,7 @@ const gameLoop = () => {
 	};
 
 	const fallCheck = () => {
-		if (player.y > canvasParams.height + 20 || player.x < canvasParams.origin_x) { // TODO: Need to add a clause for falls off the right of the screen and not within the goal markers.
+		if (player.y > canvasParams.height + 20 || player.x < canvasParams.origin_x || (player.x > canvasParams.width + 20 && player.y < goalParams.top - 30) || (player.x >canvasParams.width + 20 && player.y > goalParams.bottom + 30)) { // TODO: Need to add a clause for falls off the right of the screen and not within the goal markers.
 			setPlayerDefault();
 		}
 	};
