@@ -208,6 +208,14 @@ const gameLoop = () => {
 
 	fallCheck();
 
+	/* Win Check, with correct Parameters:
+	const winCheck = () => {
+		if (player.x > canvasParams.width + 20 && player.y > goalParams.top - 30 && player.y < goalParams.bottom + 30) {
+		//Add a win cindition here!
+	};
+
+	winCheck();
+*/
 
 	renderCanvas();
 	renderPlayer();
@@ -259,9 +267,11 @@ TODO:
 2. -DONE- Make a collision detector for the dodgers.
 3. -DONE- Program the result of the dodger collison detecor. Suggest returning the player to the starting position. 
 4. -DONE- Add a goal. I suggest a green or light blue marker at the right of the screen a set height above the final platform; the player jumps through this to 'win'.
-5. Add a detector for falling off the level, and a fall condition.
-5. Add a detector for 'win'. It will be the player passing through the goal.
+5. -DONE- Add a detector for falling off the level, and a fall condition.
+5. Add a detector for 'win'. It will be the player passing through the goal. TODO: Written the check, need to add the event and uncomment it.
 6. Add a win animation! Can we do fireworks? I bet we can! Also atext 'you win!' in pixel text, and a 'try again? button which uses an event listener.
 7. Add a counter for the number of wins.
 8. Add a nice animation for fail events eg. dodger collisions  falls.
+9. Refactor! In particular, move a lot of functions out of the game loop! Also sort them into a sensible order.
+10. Do we want to move different functions into different JS documents? Good modular practice...
 */
