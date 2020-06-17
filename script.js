@@ -112,12 +112,17 @@ const createPlatforms = () => {
 	}
 };
 
-
-
 const renderPlatforms = () => {
 	ctx.fillStyle = "#45597E";
 	platforms.forEach(platform => ctx.fillRect(platform.x, platform.y, platform.width, platform.height));
 }
+
+const renderFireworks = () => {
+	fireworks.forEach(firework => {
+		ctx.fillStyle = firework.color;
+		ctx.fillRect(firework.x, firework.y, firework.width,firework.height);
+	});
+};
 
 const goalParams = {};
 
@@ -133,6 +138,34 @@ const renderDodgers = () => {
 	ctx.fillStyle = "#000000";
 	dodgers.forEach(dodger => ctx.fillRect(dodger.x, dodger.y, dodger.width, dodger.height));
 }
+
+const numFireworks = 5;
+const fireworks = [];
+
+const fireworkColorGenerator = () => {
+	const figures = '0123456789ABCDEF';
+	let randomFireworkColor = '#';
+	for (i = 0; i < 6; i++) {
+	  randomFireworkColor += figures[Math.floor(Math.random() * 16)];
+	}
+	return randomFireworkColor;
+};
+
+const createFireworks = () => {
+	for (i=0; i<numFireworks; i++) {
+		fireworks.push(
+			{
+			x: 245,
+			y: 245,
+			width: 10,
+			height: 10,
+			velocity_x: -12 + Math.floor(Math.random() * 24),
+			velocity_y: Math.floor(Math.random() * -20),
+			color: fireworkColorGenerator(),
+			}
+		)
+	};
+};
 
 const gameLoop = () => {
 	if(arrowKeys.right) {
@@ -176,7 +209,7 @@ const gameLoop = () => {
 		platformElem.y < player.y && player.y < platformElem.y + platformElem.height) {
 			currentPlatform = platformIndex;
 		}
-	}
+	};
 
 	platforms.forEach(platformCheck);
 
@@ -208,20 +241,29 @@ const gameLoop = () => {
 
 	fallCheck();
 
-	/* Win Check, with correct Parameters:
 	const winCheck = () => {
 		if (player.x > canvasParams.width + 20 && player.y > goalParams.top - 30 && player.y < goalParams.bottom + 30) {
-		//Add a win cindition here!
+			createFireworks()
+		}
 	};
 
 	winCheck();
-*/
+
+	const fireworksController = fireworkElem => {
+		fireworkElem.velocity_y += gravity;
+		fireworkElem.y += fireworkElem.velocity_y;
+		fireworkElem.x += fireworkElem.velocity_x;
+	};
+
+	fireworks.forEach(fireworksController);
 
 	renderCanvas();
 	renderPlayer();
 	renderPlatforms();
 	renderDodgers();
 	renderGoal(currentPlatformY);
+	renderFireworks();
+
 } 
 
 const buttonTextFlash = (buttonName) => {
@@ -244,7 +286,6 @@ ctx.canvas.width = canvasParams.width;
 createPlatforms();
 document.addEventListener("keyup", keyUp);
 document.addEventListener("keydown", keyDown);
-//TODO: Animate Retry button
 retryButton.addEventListener("click", () => {
 	setPlayerDefault();
 	buttonTextFlash(retryButton);
@@ -263,6 +304,7 @@ setInterval(gameLoop, 20);
 
 /*
 TODO:
+0. Check that canvas elements, esp. fireworks, are clearing. MAy eb sensible to add a setTimeout to clear the fireworks after 5s.
 1 - DONE - Improve the retry button.
 2. -DONE- Make a collision detector for the dodgers.
 3. -DONE- Program the result of the dodger collison detecor. Suggest returning the player to the starting position. 
