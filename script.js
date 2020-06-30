@@ -185,7 +185,6 @@ const fireworkColorGenerator = () => {
 
 const createFireworks = () => {
 	for (let i=0; i<numFireworks; i++) {
-		console.log("Generating firework " + i)
 		fireworks.push(
 			{
 			x: 245,
@@ -197,7 +196,6 @@ const createFireworks = () => {
 			color: fireworkColorGenerator(),
 			}
 		)
-		console.log("Firework " + i + " generated")
 	};
 };
 
