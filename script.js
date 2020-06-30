@@ -139,7 +139,7 @@ const renderDodgers = () => {
 	dodgers.forEach(dodger => ctx.fillRect(dodger.x, dodger.y, dodger.width, dodger.height));
 }
 
-const numFireworks = 5;
+const numFireworks = 25;
 const fireworks = [];
 
 const fireworkColorGenerator = () => {
@@ -152,7 +152,8 @@ const fireworkColorGenerator = () => {
 };
 
 const createFireworks = () => {
-	for (i=0; i<numFireworks; i++) {
+	for (let i=0; i<numFireworks; i++) {
+		console.log("Generating firework " + i)
 		fireworks.push(
 			{
 			x: 245,
@@ -164,6 +165,7 @@ const createFireworks = () => {
 			color: fireworkColorGenerator(),
 			}
 		)
+		console.log("Firework " + i + " generated")
 	};
 };
 
@@ -174,6 +176,13 @@ const generateNewLevel = () => {
 	setPlayerDefault();
 	gravity = 0.6;
 	createPlatforms();
+};
+
+const winCheck = () => {
+	if (player.x > canvasParams.width + 20 && player.y > goalParams.top - 30 && player.y < goalParams.bottom + 30) {
+	createFireworks();
+	generateNewLevel()
+	}
 };
 
 const gameLoop = () => {
@@ -249,13 +258,6 @@ const gameLoop = () => {
 	};
 
 	fallCheck();
-
-	const winCheck = () => {
-		if (player.x > canvasParams.width + 20 && player.y > goalParams.top - 30 && player.y < goalParams.bottom + 30) {
-		createFireworks();
-		generateNewLevel()
-		}
-	};
 
 	winCheck();
 
