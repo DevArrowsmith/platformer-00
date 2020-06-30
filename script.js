@@ -167,6 +167,15 @@ const createFireworks = () => {
 	};
 };
 
+const generateNewLevel = () => {
+	platforms = [];
+	dodgers = [];
+	gravity = 0;
+	setPlayerDefault();
+	gravity = 0.6;
+	createPlatforms();
+};
+
 const gameLoop = () => {
 	if(arrowKeys.right) {
 		player.x += 2.5;
@@ -243,7 +252,8 @@ const gameLoop = () => {
 
 	const winCheck = () => {
 		if (player.x > canvasParams.width + 20 && player.y > goalParams.top - 30 && player.y < goalParams.bottom + 30) {
-			createFireworks()
+		createFireworks();
+		generateNewLevel()
 		}
 	};
 
@@ -253,6 +263,7 @@ const gameLoop = () => {
 		fireworkElem.velocity_y += gravity;
 		fireworkElem.y += fireworkElem.velocity_y;
 		fireworkElem.x += fireworkElem.velocity_x;
+		fireworkElem.color = fireworkColorGenerator()
 	};
 
 	fireworks.forEach(fireworksController);
@@ -291,12 +302,7 @@ retryButton.addEventListener("click", () => {
 	buttonTextFlash(retryButton);
 });
 newLevelButton.addEventListener("click", () => {
-	platforms = [];
-	dodgers = [];
-	gravity = 0;
-	setPlayerDefault();
-	gravity = 0.6;
-	createPlatforms();
+	generateNewLevel()
 	buttonTextFlash(newLevelButton);
 });
 

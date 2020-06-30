@@ -1,5 +1,6 @@
 * {
-	font-family: 'Permanent Marker', cursive;
+	/* font-family: 'Permanent Marker', cursive; */
+	font-family: 'Press Start 2P', cursive;
 }
 
 #polaroid {
@@ -18,9 +19,18 @@ canvas {
 }
 
 h1, h2 {
-	height: auto;
-	font-size: 1.8em;
+	padding: 4px 0 0 0;
 }
+
+h1 {
+	font-size: 1.4em;
+}
+
+h2 {
+	font-size: 1.2em;
+}
+
+
 #polaroid-footer {
 	height: 100px;
 	width: 100%;
@@ -35,6 +45,7 @@ h1, h2 {
 	border-radius: 15px; 
 	height: 50px;
 	width: 220px;
+	padding: 4px 0 0 0;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
