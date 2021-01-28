@@ -1,5 +1,5 @@
 # Platformer 00
-https://gummicode.github.io/platformer-00/
+https://devarrowsmith.github.io/platformer-00/
 
 ## Introduction
 This app is a small browser-based platform game powered by a JavaScript event loop, with object styling and rendering controlled using CSS & HTML.
@@ -18,7 +18,7 @@ The project began as an implementation of [this tutorial](https://www.educative.
 - Familiarise myself with JavaScript, HTML and CSS in an unfamiliar context.
 
 ## Running the App
-The app is hosted on GitHub pages. It can be accessed at https://gummicode.github.io/platformer-00/
+The app is hosted on GitHub pages. It can be accessed at https://devarrowsmith.github.io/platformer-00/
 
 The app can also be run locally:
 1. [Clone the app onto your device.](https://docs.github.com/en/enterprise/2.13/user/articles/cloning-a-repository)
