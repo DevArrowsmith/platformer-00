@@ -4,7 +4,7 @@
 
 I wanted to try making a game with an event loop and basic physics.  
 I used [this tutorial](https://www.educative.io/edpresso/how-to-make-a-simple-platformer-using-javascript) to create the basic game, then I added some elements of my own.  
-You can play the game [here](https://devarrowsmith.github.io/platformer-00/).
+You can play the game [here](https://devarrowsmith.github.io/platformer-00/). The game is not yet responsive and only works on desktop devices.
 
 ---
 
