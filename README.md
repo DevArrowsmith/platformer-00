@@ -61,9 +61,11 @@ Styled with CSS.
 ---
 
 ## Next Steps
+
 - Show the controls in the game window.
-- The app doesn't work on mobile devices. it could be rescaled with media queries to permit this. I'm not sure how to add touch controls to a game, but I can find out!
-- It would be nice to add some extra graphics that show on key events, like falling and enemy collisions.
+- Make the app responsive.
+- Add mobile controls.
+- Add some extra graphics that show on key events like falling and enemy collisions.
 - Add more enemy types. Ideas include...
   - Ziggy: Moves left and right over a platform
   - Tag: Follows the player's x-location but is confined to a platform
@@ -72,7 +74,6 @@ Styled with CSS.
   - Sentry: Fires small projectiles at the player, but only shoots from right to left. Bound to the leftmost edge of a platform
 - Add a difficulty controller that modifies the number and type of enemies generated.
 - Add a tracker that shows how many wins and losses you've had.
-
 ---
 
 ## Credits
